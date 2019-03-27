@@ -6,6 +6,8 @@ public class Hacker : MonoBehaviour
 {
     //Game State
     string level; //member variable
+    enum Screen { MainMenu, Password, Win}; //screen setting
+    Screen currentScreen = Screen.MainMenu;
 
     // Start is called before the first frame update
     void Start() {
@@ -38,7 +40,9 @@ public class Hacker : MonoBehaviour
     }
 
     void StartGame() {
-        Terminal.WriteLine("You have chosen " + level + " mode"); 
+        currentScreen = Screen.Password;
+        Terminal.WriteLine("You have chosen " + level + " mode");
+        Terminal.WriteLine("Please enter your password: ");
     }
 
     // Update is called once per frame
