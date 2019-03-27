@@ -7,7 +7,8 @@ public class Hacker : MonoBehaviour
     //Game State
     string level; //member variable
     enum Screen { MainMenu, Password, Win}; //screen setting
-    Screen currentScreen = Screen.MainMenu;
+    Screen currentScreen;
+    string password;
 
     // Start is called before the first frame update
     void Start() {
@@ -15,6 +16,7 @@ public class Hacker : MonoBehaviour
     }
 
     void ShowMainMenu() {
+        currentScreen = Screen.MainMenu;
         Terminal.ClearScreen();
         Terminal.WriteLine("Hello! Choose your hacking difficulty");
         Terminal.WriteLine("Press 1 for Easy");
@@ -28,20 +30,23 @@ public class Hacker : MonoBehaviour
         {
             ShowMainMenu();
         }
-        else if (currentScreen == Screen.MainMenu)
-        {
+        else if (currentScreen == Screen.MainMenu){
             RunMainMenu(input);
+        }
+        else if (currentScreen == Screen.Password) {
+            CheckPassword(input);
         }
     }
 
     void RunMainMenu(string input)
     {
         if (input == "1"){
-            level = 1;
+            level = "Easy";
             StartGame();
         }
         else if (input == "2"){
-            level = 2;
+            level = "Hard";
+            password = "password";
             StartGame();
         }
         else if (input == "007"){
@@ -57,6 +62,16 @@ public class Hacker : MonoBehaviour
         currentScreen = Screen.Password;
         Terminal.WriteLine("You have chosen " + level + " mode");
         Terminal.WriteLine("Please enter your password: ");
+    }
+
+    void CheckPassword(string input) { 
+
+        if (input == password) {
+            Terminal.WriteLine("Congratulations, you win!");
+        }
+        else {
+            Terminal.WriteLine("Wrong password. Please try again");
+        }
     }
 
     // Update is called once per frame
