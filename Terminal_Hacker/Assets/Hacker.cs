@@ -16,26 +16,40 @@ public class Hacker : MonoBehaviour
 
     void ShowMainMenu() {
         Terminal.ClearScreen();
-        Terminal.WriteLine("Hello! Choose your difficulty");
+        Terminal.WriteLine("Hello! Choose your hacking difficulty");
         Terminal.WriteLine("Press 1 for Easy");
         Terminal.WriteLine("Press 2 for Hard");
         Terminal.WriteLine("Enter your choice: ");
     }
 
-    void OnUserInput(string input) {
-        if(input == "menu") {
+    void OnUserInput(string input)
+    {
+        if (input == "menu") // we can always go direct to main menu
+        {
             ShowMainMenu();
         }
-        else if (input == "1") {
-            level = "Easy";
+        else if (currentScreen == Screen.MainMenu)
+        {
+            RunMainMenu(input);
+        }
+    }
+
+    void RunMainMenu(string input)
+    {
+        if (input == "1"){
+            level = 1;
             StartGame();
         }
-        else if (input == "2") {
-            level = "Hard";
+        else if (input == "2"){
+            level = 2;
             StartGame();
         }
-        else {
-            Terminal.WriteLine("Please enter a valid input");
+        else if (input == "007"){
+            Terminal.WriteLine("Please select a level Mr Bond!");
+        }
+        else
+        {
+            Terminal.WriteLine("Please choose a valid level");
         }
     }
 
